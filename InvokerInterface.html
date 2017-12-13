@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Didact+Gothic|Ubuntu" rel="stylesheet"> 
+ <link rel="stylesheet" href="w3.css"> 
+ 		<link rel="stylesheet" href="style.css" type="text/css">
+		<style type="text/css">
+       html, body{
+		font-family: 'Didact Gothic', sans-serif;
+		}
+		h1, h2, h3, h4, h5, h6 {
+			font-family: 'Ubuntu', serif;
+		}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+			<script type="text/javascript" src="jquery-ui.js"></script>
+		<script type="text/javascript">
+        var QuasVotes;
+		var WexVotes;
+		var ExortVotes;
+		var winner;
+		var widthTing = 100;
+		var iteration = 0;
+		var CountdownFrom;
+		var interval;
+		var start;
+		
+		$(document).ready(function(){   
+		
+		$.getJSON("http://192.168.0.23:5000/spells", function(result){
+		var SpellList = result.id; /*#List of ids*/
+		var randomID = Math.floor((Math.random() * SpellList.length) + 1); /*Generates a random number from the length of the list*/
+		var jsonURL = "http://192.168.0.23:5000/spells/" + randomID.toString(); /* Generates a URL to the JSON file of the random question */
+		  $.getJSON(jsonURL, function(resultA){
+		var SpellDict = resultA.id[0];  /*QuestionB is a dictionary of SQL table headers*/
+		$("#SpellName").text(SpellDict.SpellName);
+		$("#SpellImage").attr("src",SpellDict.IMG)
+		});       
+		
+		
+		$.getJSON("http://192.168.0.23:5000/getorb", function(VoteResult){ 
+			QuasVotes = VoteResult.Quas;
+			WexVotes = VoteResult.Wex;
+			ExortVotes = VoteResult.Exort;
+		  $(".QVotes").text(QuasVotes + " votes")
+		  $(".WVotes").text(WexVotes + " votes")
+		  $(".EVotes").text(ExortVotes + " votes")
+			});
+		  
+		start = new Date;
+		interval = setInterval(function() {
+		   CountdownFrom = Math.floor(62 + ((start - new Date) / 1000))
+		$('.timer').text(CountdownFrom + " seconds left...");
+		widthTing -= 1.61290322581;
+		$("#myBar").animate({width:widthTing+"%"});
+		
+		if (CountdownFrom == 0 || CountdownFrom < 0) {
+		clearInterval(interval)
+		$('.timer').text("Voting finished.")
+		   if (QuasVotes > WexVotes) && (QuasVotes > ExortVotes){
+		   $('.Result').text("You casted a Quas orb.")
+		   $("#orbOne").attr("src","images/Quas_Icon.png")
+		   } 
+		   if (WexVotes > QuasVotes) && (WexVotes > ExortVotes) {
+		   $('.Result').text("You casted a Wex orb.")
+		   $("#orbOne").attr("src","images/Wex_Icon.png")
+		
+		   } 
+		   if (ExortVotes > QuasVotes) && (ExortVotes > WexVotes) {
+		   $('.Result').text("You casted an Exort orb.")
+		   $("#orbOne").attr("src","images/Exort_Icon.png")
+			   
+		   } 
+		   if (ExortVotes == QuasVotes) && (ExortVotes == QuasVotes){
+		   $('.Result').text("It's a tie!")
+			   /* Do something for Tie */
+		   }      
+		   /* Do something here to indicate first round of voting is over*/
+		  }  /* End of if  */
+		 }, 1000);
+		});
+	
+		
+		$.getJSON("http://192.168.0.23:5000/getorb", function(VoteResult){ 
+			QuasVotes = VoteResult.Quas;
+			WexVotes = VoteResult.Wex;
+			ExortVotes = VoteResult.Exort;
+		  $(".QVotes").text(QuasVotes + " votes")
+		  $(".WVotes").text(WexVotes + " votes")
+		  $(".EVotes").text(ExortVotes + " votes")
+			});
+		  
+		start = new Date;
+		interval = setInterval(function() {
+		   CountdownFrom = Math.floor(62 + ((start - new Date) / 1000))
+		$('.timer').text(CountdownFrom + " seconds left...");
+		widthTing -= 1.61290322581;
+		$("#myBar").animate({width:widthTing+"%"});
+		
+		if (CountdownFrom == 0 || CountdownFrom < 0) {
+		clearInterval(interval)
+		$('.timer').text("Voting finished.")
+		   if (QuasVotes > WexVotes) && (QuasVotes > ExortVotes){
+		   $('.Result').text("You casted a Quas orb.")
+		   $("#orbOne").attr("src","images/Quas_Icon.png")
+		   } 
+		   if (WexVotes > QuasVotes) && (WexVotes > ExortVotes) {
+		   $('.Result').text("You casted a Wex orb.")
+		   $("#orbOne").attr("src","images/Wex_Icon.png")
+		
+		   } 
+		   if (ExortVotes > QuasVotes) && (ExortVotes > WexVotes) {
+		   $('.Result').text("You casted an Exort orb.")
+		   $("#orbOne").attr("src","images/Exort_Icon.png")
+			   
+		   } 
+		   if (ExortVotes == QuasVotes) && (ExortVotes == QuasVotes){
+		   $('.Result').text("It's a tie!")
+			   /* Do something for Tie */
+		   }      
+		   /* Do something here to indicate first round of voting is over*/
+		  }  /* End of if  */
+		 }, 1000);
+		});
+	
+	
+	
+	
+	
+	});
+	
+		</script>
+		<title></title>
+	</head>
+	<body>
+		<h1 class="Title w3-container w3-center">
+			Welcome to Twitch plays 'Would you rather'! Check the panels below for help.
+		</h1>
+		<h2 class="Question w3-container w3-center w3-round-xxlarge w3-white" style="width:75%;margin: 0 auto;border-style: solid;">
+			This is the posed question?
+		</h2>
+		<div class="Prompts w3-cell-row w3-xxlarge" style="width:750px;margin: 0 auto;">
+			<div class="PromptA w3-container w3-cell w3-center">
+				Type A in chat to vote!
+			</div>
+			<div class="PromptB w3-container w3-cell w3-center">
+				Type B in chat to vote!
+			</div>
+		</div>
+		<div class="Options w3-cell-row w3-center" style="width:75%;margin: 0 auto;">
+			<div class="OptionA w3-container w3-cell" style="width:50%; background-color: #EA4D63;border-style: solid;border-top-left-radius:25px;border-bottom-left-radius: 25px;">
+				<div class="w3-container">
+					<p class="AWords w3-xxlarge"></p>
+				</div>
+				<div class="w3-container">
+					<p class="AVotes w3-large"></p>
+				</div>
+			</div>
+			<div class="OptionB w3-container w3-cell" style="width:50%;background-color:#2BA9E5;border-style: solid;border-top-right-radius: 25px;border-bottom-right-radius: 25px;">
+				<div class="w3-container">
+					<p class="BWords w3-xxlarge"></p>
+				</div>
+				<div class="w3-container">
+					<p class="BVotes w3-large"></p>
+				</div>
+			</div>
+		</div>
+		<div class="TimerContainer w3-container">
+			<div class="w3-round-xxlarge w3-margin w3-panel">
+				<div id="myBar" class="w3-round-xxlarge" style="background-color:white;height:50px;width:100%;border-style:solid; border-color:black;z-index: 1;"></div>
+			</div>
+			<h3 class="timer w3-text-black w3-center w3-xxlarge" style="z-index: 2;">
+				60 seconds left
+			</h3>
+		</div>
+		<h2 class="Result w3-container w3-center"></h2>
+	</body>
+</html>
