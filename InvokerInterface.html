@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<link href="https://fonts.googleapis.com/css?family=Didact+Gothic|Ubuntu" rel="stylesheet"> 
- <link rel="stylesheet" href="w3.css"> 
- 		<link rel="stylesheet" href="style.css" type="text/css">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 		
+		<link rel="stylesheet" href="style.css" type="text/css">
 		<style type="text/css">
        html, body{
 		font-family: 'Didact Gothic', sans-serif;
@@ -102,16 +102,16 @@
 		$('.timer').text("Voting finished.")
 		   if (QuasVotes > WexVotes) && (QuasVotes > ExortVotes){
 		   $('.Result').text("You casted a Quas orb.")
-		   $("#orbOne").attr("src","images/Quas_Icon.png")
+		   $("#orbTwo").attr("src","images/Quas_Icon.png")
 		   } 
 		   if (WexVotes > QuasVotes) && (WexVotes > ExortVotes) {
 		   $('.Result').text("You casted a Wex orb.")
-		   $("#orbOne").attr("src","images/Wex_Icon.png")
+		   $("#orbTwo").attr("src","images/Wex_Icon.png")
 		
 		   } 
 		   if (ExortVotes > QuasVotes) && (ExortVotes > WexVotes) {
 		   $('.Result').text("You casted an Exort orb.")
-		   $("#orbOne").attr("src","images/Exort_Icon.png")
+		   $("#orbTwo").attr("src","images/Exort_Icon.png")
 			   
 		   } 
 		   if (ExortVotes == QuasVotes) && (ExortVotes == QuasVotes){
@@ -132,47 +132,65 @@
 		</script>
 		<title></title>
 	</head>
-	<body>
-		<h1 class="Title w3-container w3-center">
-			Welcome to Twitch plays 'Would you rather'! Check the panels below for help.
-		</h1>
-		<h2 class="Question w3-container w3-center w3-round-xxlarge w3-white" style="width:75%;margin: 0 auto;border-style: solid;">
-			This is the posed question?
-		</h2>
-		<div class="Prompts w3-cell-row w3-xxlarge" style="width:750px;margin: 0 auto;">
-			<div class="PromptA w3-container w3-cell w3-center">
-				Type A in chat to vote!
-			</div>
-			<div class="PromptB w3-container w3-cell w3-center">
-				Type B in chat to vote!
-			</div>
-		</div>
-		<div class="Options w3-cell-row w3-center" style="width:75%;margin: 0 auto;">
-			<div class="OptionA w3-container w3-cell" style="width:50%; background-color: #EA4D63;border-style: solid;border-top-left-radius:25px;border-bottom-left-radius: 25px;">
-				<div class="w3-container">
-					<p class="AWords w3-xxlarge"></p>
-				</div>
-				<div class="w3-container">
-					<p class="AVotes w3-large"></p>
-				</div>
-			</div>
-			<div class="OptionB w3-container w3-cell" style="width:50%;background-color:#2BA9E5;border-style: solid;border-top-right-radius: 25px;border-bottom-right-radius: 25px;">
-				<div class="w3-container">
-					<p class="BWords w3-xxlarge"></p>
-				</div>
-				<div class="w3-container">
-					<p class="BVotes w3-large"></p>
-				</div>
+	<body class="w3-white">
+	<div class="TitleRow w3-cell-row ">
+		<div class="w3-container w3-purple w3-cell" style="width:25%; height:75px">
+			<h2>Welcome to Twitch plays Invoker</h2>
+	    </div>
+	    <div class="w3-container w3-orange w3-cell">
+			<h2>Current uptime: 00H 00M 00S</h2>
+	    </div>
+	 </div>
+ 
+	 <div class="SpellRow w3-cell-row w3-center">
+		<div class="w3-container w3-center w3-cell" style="width:25%;"></div>
+    
+		<div class="w3-container w3-blue w3-cell" style="width:50%;height:80px">
+			<div class="w3-cell-row">
+				<img class="SpellImage w3-cell" src="images/Tornado.png" alt="Spell" style="height:75px;width:75px"></img>
+				<h2 class="SpellName w3-cell w3-center" style="width:50%">Cast Tornado</h2>
 			</div>
 		</div>
-		<div class="TimerContainer w3-container">
-			<div class="w3-round-xxlarge w3-margin w3-panel">
-				<div id="myBar" class="w3-round-xxlarge" style="background-color:white;height:50px;width:100%;border-style:solid; border-color:black;z-index: 1;"></div>
-			</div>
-			<h3 class="timer w3-text-black w3-center w3-xxlarge" style="z-index: 2;">
-				60 seconds left
-			</h3>
+		<div class="w3-container w3-cell" style="width:25%;"></div>
+	 </div>
+
+	 <div style="height:50px"></div>
+ 
+	 <div class="Orbs w3-cell-row w3-center">
+		<div class="w3-container w3-cell" style="width:20%;"></div>
+	    <div class="orbOne w3-container w3-cell w3-cell-middle">
+			<img src="images/Quas_Icon.png" alt="Spell" style="height:200px;width:200px"></img>
+		
 		</div>
-		<h2 class="Result w3-container w3-center"></h2>
-	</body>
+		<div class="orbTwo w3-container w3-cell w3-cell-middle">
+			<img src="images/Wex_Icon.png" alt="Spell" style="height:200px;width:200px"></img>
+		</div>
+		<div class="orbThree w3-container w3-cell w3-cell-middle">
+			<img src="images/Exort_Icon.png" alt="Spell" style="height:200px;width:200px"></img>
+		</div>
+		<div class="w3-container w3-cell" style="width:20%;"></div>
+	 </div>
+
+	 <div class="Footer w3-cell-row w3-blue w3-center" style="width:50%;height:100px; position: fixed; z-index:100;bottom:0;left:25%;">
+		<div class="Portrait w3-cell">
+			<img src="https://thumbs.gfycat.com/KnobbyReasonableAllensbigearedbat-small.gif" style="height:150px;width:150px"></img>
+		</div>
+		<div class="w3-cell">
+			<img src="images/Quas_Icon.png" style="height:150px;width:150px">
+			<h5 class="QVotes"></h5>
+		</div>
+		<div class="w3-cell">
+			<img src="images/Wex_Icon.png" style="height:150px;width:150px">
+			<h5 class="WVotes"></h5>
+		</div>
+		<div class="w3-cell">
+			<img src="images/Exort_Icon.png" style="height:150px;width:150px">
+			<h5 class="EVotes"></h5>
+		</div>
+		<div class="w3-cell">
+			<img src="images/Invoke_icon.png" style="height:150px;width:150px">
+		</div>
+	 </div>
+ 
+	 </body>
 </html>
