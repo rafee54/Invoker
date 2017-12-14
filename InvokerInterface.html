@@ -13,7 +13,6 @@
 		}
 		</style>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
-			<script type="text/javascript" src="jquery-ui.js"></script>
 		<script type="text/javascript">
         var QuasVotes;
 		var WexVotes;
@@ -27,18 +26,18 @@
 		
 		$(document).ready(function(){   
 		
-		$.getJSON("http://192.168.0.23:5000/spells", function(result){
+		$.getJSON("http://192.168.0.8:5000/spells", function(result){
 		var SpellList = result.id; /*#List of ids*/
 		var randomID = Math.floor((Math.random() * SpellList.length) + 1); /*Generates a random number from the length of the list*/
-		var jsonURL = "http://192.168.0.23:5000/spells/" + randomID.toString(); /* Generates a URL to the JSON file of the random question */
+		var jsonURL = "http://192.168.0.8:5000/spells/" + randomID.toString(); /* Generates a URL to the JSON file of the random question */
 		  $.getJSON(jsonURL, function(resultA){
 		var SpellDict = resultA.id[0];  /*QuestionB is a dictionary of SQL table headers*/
-		$("#SpellName").text(SpellDict.SpellName);
-		$("#SpellImage").attr("src",SpellDict.IMG)
+		$(".SpellName").text(SpellDict.name);
+		$(".SpellImage").attr("src",SpellDict.IMG)
 		});       
 		
 		
-		$.getJSON("http://192.168.0.23:5000/getorb", function(VoteResult){ 
+		$.getJSON("http://192.168.0.8:5000/getorb", function(VoteResult){ 
 			QuasVotes = VoteResult.Quas;
 			WexVotes = VoteResult.Wex;
 			ExortVotes = VoteResult.Exort;
@@ -57,76 +56,28 @@
 		if (CountdownFrom == 0 || CountdownFrom < 0) {
 		clearInterval(interval)
 		$('.timer').text("Voting finished.")
-		   if (QuasVotes > WexVotes) && (QuasVotes > ExortVotes){
+		   if (QuasVotes > WexVotes && QuasVotes > ExortVotes){
 		   $('.Result').text("You casted a Quas orb.")
 		   $("#orbOne").attr("src","images/Quas_Icon.png")
 		   } 
-		   if (WexVotes > QuasVotes) && (WexVotes > ExortVotes) {
+		   if (WexVotes > QuasVotes && WexVotes > ExortVotes) {
 		   $('.Result').text("You casted a Wex orb.")
 		   $("#orbOne").attr("src","images/Wex_Icon.png")
 		
 		   } 
-		   if (ExortVotes > QuasVotes) && (ExortVotes > WexVotes) {
+		   if (ExortVotes > QuasVotes && ExortVotes > WexVotes) {
 		   $('.Result').text("You casted an Exort orb.")
 		   $("#orbOne").attr("src","images/Exort_Icon.png")
 			   
 		   } 
-		   if (ExortVotes == QuasVotes) && (ExortVotes == QuasVotes){
+		   if (ExortVotes == QuasVotes && ExortVotes == QuasVotes){
 		   $('.Result').text("It's a tie!")
 			   /* Do something for Tie */
 		   }      
 		   /* Do something here to indicate first round of voting is over*/
 		  }  /* End of if  */
 		 }, 1000);
-		});
-	
-		
-		$.getJSON("http://192.168.0.23:5000/getorb", function(VoteResult){ 
-			QuasVotes = VoteResult.Quas;
-			WexVotes = VoteResult.Wex;
-			ExortVotes = VoteResult.Exort;
-		  $(".QVotes").text(QuasVotes + " votes")
-		  $(".WVotes").text(WexVotes + " votes")
-		  $(".EVotes").text(ExortVotes + " votes")
-			});
-		  
-		start = new Date;
-		interval = setInterval(function() {
-		   CountdownFrom = Math.floor(62 + ((start - new Date) / 1000))
-		$('.timer').text(CountdownFrom + " seconds left...");
-		widthTing -= 1.61290322581;
-		$("#myBar").animate({width:widthTing+"%"});
-		
-		if (CountdownFrom == 0 || CountdownFrom < 0) {
-		clearInterval(interval)
-		$('.timer').text("Voting finished.")
-		   if (QuasVotes > WexVotes) && (QuasVotes > ExortVotes){
-		   $('.Result').text("You casted a Quas orb.")
-		   $("#orbTwo").attr("src","images/Quas_Icon.png")
-		   } 
-		   if (WexVotes > QuasVotes) && (WexVotes > ExortVotes) {
-		   $('.Result').text("You casted a Wex orb.")
-		   $("#orbTwo").attr("src","images/Wex_Icon.png")
-		
-		   } 
-		   if (ExortVotes > QuasVotes) && (ExortVotes > WexVotes) {
-		   $('.Result').text("You casted an Exort orb.")
-		   $("#orbTwo").attr("src","images/Exort_Icon.png")
-			   
-		   } 
-		   if (ExortVotes == QuasVotes) && (ExortVotes == QuasVotes){
-		   $('.Result').text("It's a tie!")
-			   /* Do something for Tie */
-		   }      
-		   /* Do something here to indicate first round of voting is over*/
-		  }  /* End of if  */
-		 }, 1000);
-		});
-	
-	
-	
-	
-	
+		});	
 	});
 	
 		</script>
