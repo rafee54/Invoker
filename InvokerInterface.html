@@ -57,21 +57,21 @@
 		clearInterval(interval)
 		$('.timer').text("Voting finished.")
 		   if (QuasVotes > WexVotes && QuasVotes > ExortVotes){
-		   $('.Result').text("You casted a Quas orb.")
-		   $("#orbOne").attr("src","images/Quas_Icon.png")
+		   $('.timer').text("You casted a Quas orb.")
+		   $(".orbOneIMG").attr("src","images/Quas_Icon.png")
 		   } 
 		   if (WexVotes > QuasVotes && WexVotes > ExortVotes) {
-		   $('.Result').text("You casted a Wex orb.")
-		   $("#orbOne").attr("src","images/Wex_Icon.png")
+		   $('.timer').text("You casted a Wex orb.")
+		   $(".orbOneIMG").attr("src","images/Wex_Icon.png")
 		
 		   } 
 		   if (ExortVotes > QuasVotes && ExortVotes > WexVotes) {
-		   $('.Result').text("You casted an Exort orb.")
-		   $("#orbOne").attr("src","images/Exort_Icon.png")
+		   $('.timer').text("You casted an Exort orb.")
+		   $(".orbOneIMG").attr("src","images/Exort_Icon.png")
 			   
 		   } 
-		   if (ExortVotes == QuasVotes && ExortVotes == QuasVotes){
-		   $('.Result').text("It's a tie!")
+		   if (ExortVotes == QuasVotes && ExortVotes == WexVotes){
+		   $('.timer').text("It's a tie!")
 			   /* Do something for Tie */
 		   }      
 		   /* Do something here to indicate first round of voting is over*/
@@ -110,14 +110,14 @@
 	 <div class="Orbs w3-cell-row w3-center">
 		<div class="w3-container w3-cell" style="width:20%;"></div>
 	    <div class="orbOne w3-container w3-cell w3-cell-middle">
-			<img src="images/Quas_Icon.png" alt="Spell" style="height:200px;width:200px"></img>
+			<img class="orbOneIMG" src="images/question.png" alt="Spell" style="height:200px;width:200px"></img>
 		
 		</div>
 		<div class="orbTwo w3-container w3-cell w3-cell-middle">
-			<img src="images/Wex_Icon.png" alt="Spell" style="height:200px;width:200px"></img>
+			<img class="orbTwoIMG" src="images/question.png" alt="Spell" style="height:200px;width:200px"></img>
 		</div>
 		<div class="orbThree w3-container w3-cell w3-cell-middle">
-			<img src="images/Exort_Icon.png" alt="Spell" style="height:200px;width:200px"></img>
+			<img class="orbThreeIMG" src="images/question.png" alt="Spell" style="height:200px;width:200px"></img>
 		</div>
 		<div class="w3-container w3-cell" style="width:20%;"></div>
 	 </div>
@@ -127,7 +127,7 @@
 				<div id="myBar" class="w3-round-xxlarge" style="background-color:white;height:50px;width:100%;border-style:solid; border-color:black;z-index: 1;"></div>
 			</div>
 			<h3 class="timer w3-text-black w3-center w3-xxlarge" style="z-index: 2;">
-				60 seconds left
+				60 seconds left...
 			</h3>
 	
 
