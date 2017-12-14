@@ -42,7 +42,7 @@ def voting():
     Quas = 0;
     Wex = 0;
     Exort = 0;
-    with TwitchChatStream(username='TwitchPlaysInvoker',oauth='',verbose=False) as chatstream:
+    with TwitchChatStream(username='wwyrd',oauth='oauth:v1exdo5jw9hmqrbozduymby6opyn6w',verbose=False) as chatstream:
 	chatstream.send_chat_message('Voting for action has begun.')
 	timer = 60
 	while timer > 0:
@@ -51,7 +51,7 @@ def voting():
             if received:
 		    if chat_message['message'].lower() == 'q': Quas += 1;
 		    if chat_message['message'].lower() == 'w': Wex += 1;
-            if chat_message['message'].lower() == 'e': Exort += 1;
+            	    if chat_message['message'].lower() == 'e': Exort += 1;
 	    timer-=1;
     result = {"Quas":Quas, "Wex":Wex, "Exort":Exort}
     return jsonify(result)
