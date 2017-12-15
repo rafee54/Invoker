@@ -23,8 +23,13 @@
 		var CountdownFrom;
 		var interval;
 		var start;
+		var comboDB = [];
+		var comboTwitch = [];
+		var correct;
+		var incorrect;
 		
 		$(document).ready(function(){   
+			$(".TitleTing").text("First round of voting.");
 		
 		$.getJSON("http://192.168.0.8:5000/spells", function(result){
 		var SpellList = result.id; /*#List of ids*/
@@ -34,6 +39,9 @@
 		var SpellDict = resultA.id[0];  /*QuestionB is a dictionary of SQL table headers*/
 		$(".SpellName").text(SpellDict.name);
 		$(".SpellImage").attr("src",SpellDict.IMG)
+		comboDB = SpellDict.combination.split("");
+		console.log(SpellDict.combination);
+		console.log("list: " + comboDB);
 		});       
 		
 		
@@ -59,24 +67,164 @@
 		   if (QuasVotes > WexVotes && QuasVotes > ExortVotes){
 		   $('.timer').text("You casted a Quas orb.")
 		   $(".orbOneIMG").attr("src","images/Quas_Icon.png")
+			   comboTwitch.push("q") 
 		   } 
 		   if (WexVotes > QuasVotes && WexVotes > ExortVotes) {
 		   $('.timer').text("You casted a Wex orb.")
 		   $(".orbOneIMG").attr("src","images/Wex_Icon.png")
-		
+			   comboTwitch.push("w") 
 		   } 
 		   if (ExortVotes > QuasVotes && ExortVotes > WexVotes) {
 		   $('.timer').text("You casted an Exort orb.")
 		   $(".orbOneIMG").attr("src","images/Exort_Icon.png")
-			   
+			   comboTwitch.push("e") 
 		   } 
 		   if (ExortVotes == QuasVotes && ExortVotes == WexVotes){
 		   $('.timer').text("It's a tie!")
 			   /* Do something for Tie */
 		   }      
-		   /* Do something here to indicate first round of voting is over*/
+
+  		 setTimeout(function() {
+   			$(".TitleTing").text("Second round of voting.");
+  	 		  $(".QVotes").text("")
+  	 		  $(".WVotes").text("")
+  	 		  $(".EVotes").text("")
+			 
+  	 		$.getJSON("http://192.168.0.8:5000/getorb", function(VoteResult){ 
+  	 			QuasVotes = VoteResult.Quas;
+  	 			WexVotes = VoteResult.Wex;
+  	 			ExortVotes = VoteResult.Exort;
+  	 		  $(".QVotes").text(QuasVotes + " votes")
+  	 		  $(".WVotes").text(WexVotes + " votes")
+  	 		  $(".EVotes").text(ExortVotes + " votes")
+  	 			});
+  				widthTing=100;
+				
+  	 		start = new Date;
+  	 		interval = setInterval(function() {
+  	 		   CountdownFrom = Math.floor(62 + ((start - new Date) / 1000))
+  	 		$('.timer').text(CountdownFrom + " seconds left...");
+  	 		widthTing -= 1.61290322581;
+  	 		$("#myBar").animate({width:widthTing+"%"});
+		
+  	 		if (CountdownFrom == 0 || CountdownFrom < 0) {
+  	 		clearInterval(interval)
+  	 		$('.timer').text("Voting finished.")
+  	 		   if (QuasVotes > WexVotes && QuasVotes > ExortVotes){
+  	 		   $('.timer').text("You casted a Quas orb.")
+  	 		   $(".orbTwoIMG").attr("src","images/Quas_Icon.png")
+			   comboTwitch.push("q") 
+				   
+  	 		   } 
+  	 		   if (WexVotes > QuasVotes && WexVotes > ExortVotes) {
+  	 		   $('.timer').text("You casted a Wex orb.")
+  	 		   $(".orbTwoIMG").attr("src","images/Wex_Icon.png")
+			   comboTwitch.push("w") 
+		
+  	 		   } 
+  	 		   if (ExortVotes > QuasVotes && ExortVotes > WexVotes) {
+  	 		   $('.timer').text("You casted an Exort orb.")
+  	 		   $(".orbTwoIMG").attr("src","images/Exort_Icon.png")
+			   comboTwitch.push("e") 
+			   
+  	 		   } 
+  	 		   if (ExortVotes == QuasVotes && ExortVotes == WexVotes){
+  	 		   $('.timer').text("It's a tie!")
+  	 			   /* Do something for Tie */
+  	 		   }      
+	    		 setTimeout(function() {
+	     			$(".TitleTing").text("Third round of voting.");
+	    	 		  $(".QVotes").text("")
+	    	 		  $(".WVotes").text("")
+	    	 		  $(".EVotes").text("")
+			 
+	    	 		$.getJSON("http://192.168.0.8:5000/getorb", function(VoteResult){ 
+	    	 			QuasVotes = VoteResult.Quas;
+	    	 			WexVotes = VoteResult.Wex;
+	    	 			ExortVotes = VoteResult.Exort;
+	    	 		  $(".QVotes").text(QuasVotes + " votes")
+	    	 		  $(".WVotes").text(WexVotes + " votes")
+	    	 		  $(".EVotes").text(ExortVotes + " votes")
+	    	 			});
+	    				widthTing=100;
+				
+	    	 		start = new Date;
+	    	 		interval = setInterval(function() {
+	    	 		   CountdownFrom = Math.floor(62 + ((start - new Date) / 1000))
+	    	 		$('.timer').text(CountdownFrom + " seconds left...");
+	    	 		widthTing -= 1.61290322581;
+	    	 		$("#myBar").animate({width:widthTing+"%"});
+		
+	    	 		if (CountdownFrom == 0 || CountdownFrom < 0) {
+	    	 		clearInterval(interval)
+	    	 		$('.timer').text("Voting finished.")
+	    	 		   if (QuasVotes > WexVotes && QuasVotes > ExortVotes){
+	    	 		   $('.timer').text("You casted a Quas orb.")
+	    	 		   $(".orbThreeIMG").attr("src","images/Quas_Icon.png")
+			   comboTwitch.push("q") 
+						   
+	    	 		   } 
+	    	 		   if (WexVotes > QuasVotes && WexVotes > ExortVotes) {
+	    	 		   $('.timer').text("You casted a Wex orb.")
+	    	 		   $(".orbThreeIMG").attr("src","images/Wex_Icon.png")
+			   comboTwitch.push("w") 
+		
+	    	 		   } 
+	    	 		   if (ExortVotes > QuasVotes && ExortVotes > WexVotes) {
+	    	 		   $('.timer').text("You casted an Exort orb.")
+	    	 		   $(".orbThreeIMG").attr("src","images/Exort_Icon.png")
+			   comboTwitch.push("e") 
+			   
+	    	 		   } 
+	    	 		   if (ExortVotes == QuasVotes && ExortVotes == WexVotes){
+	    	 		   $('.timer').text("It's a tie!")
+	    	 			   /* Do something for Tie */
+	    	 		   }      
+				       setTimeout(function(){ 
+						   var result = comboDB.reduce(function permute(res, item, key, arr) {
+						       return res.concat(arr.length > 1 && arr.slice(0, key).concat(arr.slice(key + 1)).reduce(permute, []).map(function(perm) { return [item].concat(perm); }) || item);
+						   }, []);   
+							
+							
+							/* FIGURE OUT IF THE TWO ARRAYS R THE SAME*/
+											   
+						   for (i = 0; i < result.length; i++) {
+						       if (result[i] == comboTwitch) {
+						       	
+								   correct+=1;
+	    	 		   				$('.timer').text("That was correct!")
+								   
+								
+						       } else {
+						       	
+	    	 		   				$('.timer').text("That was incorrect, try again.")
+								
+						       }
+						   } 
+						   
+						   
+						   
+					   }, 3000);
+	    	 		  }  /* End of if  */
+	    	 		 }, 1000);
+
+
+	    		 }, 10000)
+  	 		  }  /* End of if  */
+  	 		 }, 1000);
+
+
+
+
+  		 }, 10000)
+
+
+
 		  }  /* End of if  */
 		 }, 1000);
+		
+		/*<--------Second Round of voting below--------->*/
+		
 		});	
 	});
 	
@@ -89,7 +237,7 @@
 			<h2>Welcome to Twitch plays Invoker</h2>
 	    </div>
 	    <div class="w3-container w3-orange w3-cell">
-			<h2>Current uptime: 00H 00M 00S</h2>
+			<h2 class="TitleTing"></h2>
 	    </div>
 	 </div>
  
