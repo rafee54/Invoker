@@ -27,9 +27,11 @@
 		var comboTwitch = [];
 		var correct;
 		var incorrect;
+		var found;
 		
 		$(document).ready(function(){   
 			$(".TitleTing").text("First round of voting.");
+			found = 0;
 		correct = localStorage.getItem("Correct");
 		incorrect = localStorage.getItem("Incorrect");
 			$(".Correct").text("Correct spells: "+correct);
@@ -191,8 +193,12 @@
 						   }, []);   											   
 						   for (i = 0; i < result.length; i++) {
 						       var lol = result[i];
-							   if (comboTwitch.length==lol.length && comboTwitch.every(function(v,i) { return v === lol[i]})) {
-		    	 		   				$('.timer').text("That was correct!")
+							   if (comboTwitch.length==lol.length && comboTwitch.every(function(v,i) { return v === lol[i]})) {		
+								   found = 1;
+						       } 
+						   }
+							   if (found == 1) {
+										$('.timer').text("That was correct!")
 								   
 								   if (typeof correct == 'number') {
 									   correct+=1;
@@ -201,8 +207,7 @@
 								   }
 								   localStorage.setItem("Correct", correct);
 								
-								
-						       } else {
+							   } else { 
 	    	 		   				$('.timer').text("That was incorrect, try again.")
 								   if (typeof incorrect == 'number') {
 									   incorrect+=1;
@@ -211,18 +216,18 @@
 								   }
 								   
 								   localStorage.setItem("Incorrect", incorrect);
-								
-						       }
+							   
+							   
 				   			$(".Correct").text("Correct spells: "+correct);
 				   		$(".Incorrect").text("Incorrect spells: "+incorrect);
 						   } 
 						   
 						   setTimeout(function(){
 						   	
-				      			$(".TitleTing").text("Next spell in three seconds...");
+				      			$(".TitleTing").text("Next spell in ten seconds...");
 								    location.reload();
 							
-						   }, 3000);
+						   }, 10000);
 						   
 					   }, 3000);
 	    	 		  }  /* End of if  */
